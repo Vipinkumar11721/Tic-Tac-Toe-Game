@@ -34,14 +34,21 @@ function checkWinner() {
     [2, 4, 6],
   ];
 
-  winningCombinations.forEach((combination) => {
+  for (const combination of winningCombinations) {
     if (
       gameBoard[combination[0]] === gameBoard[combination[1]] &&
       gameBoard[combination[1]] === gameBoard[combination[2]] &&
       gameBoard[combination[0]] !== ""
     ) {
       gameOver = true;
-      alert('Player ${gameBoard[combination[0]]} wins!');
+      alert(`Player ${gameBoard[combination[0]]} wins!`);
+      return; // stop checking after a winner is found
     }
-  });
+  }
+
+  // If no winner and the board is full, it's a draw
+  if (!gameOver && !gameBoard.includes("")) {
+    gameOver = true;
+    alert("It's a draw!");
+  }
 }
